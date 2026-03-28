@@ -89,17 +89,36 @@ Request body:
 }
 ```
 
-## Deployment Notes
-### Frontend (Vercel / Netlify)
-- Set env variable: `VITE_API_BASE_URL=https://your-backend-domain/api`
-- Build command: `npm run build`
-- Output directory: `dist`
+## Deployment (Live Demo)
+### Step 1) Deploy Backend on Render
+1. Open Render Dashboard and click `New +` -> `Blueprint`.
+2. Connect your GitHub repo `sapnasapna02519-wq/portfolio`.
+3. Render will detect `render.yaml` automatically.
+4. Set required env values in Render:
+   - `MONGO_URI` = your MongoDB Atlas connection string
+   - `CLIENT_URL` = temporary value (you will update after frontend deploy)
+5. Deploy and copy backend URL, for example:
+   - `https://sapna-portfolio-backend.onrender.com`
 
-### Backend (Render / Railway)
-- Set env variables from `.env`
-- Start command: `npm start`
-- Ensure MongoDB Atlas URI is accessible from deployed backend
-- Set `CLIENT_URL` to your deployed frontend URL
+### Step 2) Deploy Frontend on Vercel
+1. Open Vercel Dashboard and click `Add New` -> `Project`.
+2. Import repo `sapnasapna02519-wq/portfolio`.
+3. Set `Root Directory` to `frontend`.
+4. Add environment variable:
+   - `VITE_API_BASE_URL=https://sapna-portfolio-backend.onrender.com/api`
+5. Deploy and copy frontend URL, for example:
+   - `https://sapna-portfolio.vercel.app`
+
+### Step 3) Final CORS update in Render
+1. Go to Render service -> `Environment`.
+2. Update:
+   - `CLIENT_URL=https://sapna-portfolio.vercel.app`
+3. Save and redeploy backend.
+
+### Step 4) Verify Contact API
+- Open frontend live URL.
+- Submit contact form.
+- Check MongoDB Atlas collection for saved message documents.
 
 ## Important
 - Replace `frontend/public/Sapna_Resume.pdf` with your real PDF resume.
