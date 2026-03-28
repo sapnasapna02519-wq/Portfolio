@@ -19,9 +19,11 @@
         <a href={project.github} target="_blank" rel="noreferrer" className="text-brand-600 hover:underline">
           GitHub
         </a>
-        <a href={project.liveDemo} target="_blank" rel="noreferrer" className="text-brand-600 hover:underline">
-          Live Demo
-        </a>
+        {project.liveDemo && (
+          <a href={project.liveDemo} target="_blank" rel="noreferrer" className="text-brand-600 hover:underline">
+            Live Demo
+          </a>
+        )}
       </div>
     </article>
   );

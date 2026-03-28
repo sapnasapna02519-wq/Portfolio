@@ -5,7 +5,7 @@
       "A full stack travel stay listing platform where users can browse destinations, view listing details, and manage accommodation posts.",
     techStack: ["Node.js", "Express.js", "MongoDB", "EJS", "Bootstrap"],
     github: "https://github.com/sapnasapna02519-wq",
-    liveDemo: "http://localhost:8080/",
+    liveDemo: "",
   },
 ];
 
@@ -27,3 +27,4 @@ export const skillCategories = [
     items: ["DSA in Java", "OOP", "Problem Solving", "DBMS Basics"],
   },
 ];
+
