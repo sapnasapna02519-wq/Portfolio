@@ -1,6 +1,13 @@
 ﻿# Sapna Portfolio (Full Stack)
 
-Production-ready personal portfolio with React + Tailwind frontend and Node.js + Express + MongoDB backend.
+Personal portfolio website built with React + Tailwind (frontend) and Node.js + Express + MongoDB (backend).
+
+## Live Links
+- Frontend: `https://sapna-portfolio.vercel.app`
+- Backend API base: `https://sapna-portfolio-backend.onrender.com/api`
+- Health check: `https://sapna-portfolio-backend.onrender.com/api/health`
+
+Note: `https://sapna-portfolio-backend.onrender.com/` can show `Not Found` because root (`/`) route is not defined. Use `/api/health` to test backend.
 
 ## Tech Stack
 - Frontend: React.js, Tailwind CSS, Vite
@@ -30,54 +37,52 @@ portfolio-fullstack/
     server.js
     package.json
     .env.example
+  render.yaml
 ```
 
 ## Features
-- Modern, clean, card-based UI (Airbnb-inspired)
-- Fully responsive design
-- Smooth scrolling and section animations
+- Responsive portfolio UI (mobile/tablet/desktop)
 - Dark/Light mode toggle
-- Portfolio sections: Home, About, Skills, Projects, Education, Achievements, Contact
-- Resume download button
-- Social links (GitHub + LinkedIn)
-- Contact form integrated with backend REST API
-- Input validation and centralized error handling
-- MongoDB message storage
+- Sections: Home, About, Skills, Projects, Education, Achievements, Contact
+- Social links (GitHub, LinkedIn)
+- Contact form connected to backend API
+- Validation and centralized error handling
+- Messages stored in MongoDB
 
-## Local Setup
-### 1) Clone and open project
-```bash
-git clone <your-repo-url>
-cd portfolio-fullstack
-```
+## Run Locally
 
-### 2) Setup backend
+### 1) Backend
 ```bash
 cd backend
 npm install
 copy .env.example .env
-```
-Update `.env` values if needed:
-- `PORT=5000`
-- `MONGO_URI=your_mongodb_connection_string`
-- `CLIENT_URL=http://localhost:5173`
-
-Run backend:
-```bash
 npm run dev
 ```
 
-### 3) Setup frontend
-Open a new terminal:
+Backend `.env`:
+- `PORT=5000`
+- `MONGO_URI=<your_mongodb_connection_string>`
+- `CLIENT_URL=http://localhost:5173`
+
+### 2) Frontend
+Open new terminal:
 ```bash
 cd frontend
 npm install
 copy .env.example .env
 npm run dev
 ```
-Frontend runs on `http://localhost:5173` and calls backend at `http://localhost:5000/api`.
+
+Frontend `.env`:
+- `VITE_API_BASE_URL=http://localhost:5000/api`
+
+Open: `http://localhost:5173`
 
 ## API
+
+### GET `/api/health`
+Returns API status.
+
 ### POST `/api/contact`
 Request body:
 ```json
@@ -85,42 +90,26 @@ Request body:
   "name": "Sapna",
   "email": "sapna@example.com",
   "subject": "Internship Opportunity",
-  "message": "I would like to discuss a role..."
+  "message": "I would like to connect with you."
 }
 ```
 
-## Deployment (Live Demo)
-### Step 1) Deploy Backend on Render
-1. Open Render Dashboard and click `New +` -> `Blueprint`.
-2. Connect your GitHub repo `sapnasapna02519-wq/portfolio`.
-3. Render will detect `render.yaml` automatically.
-4. Set required env values in Render:
-   - `MONGO_URI` = your MongoDB Atlas connection string
-   - `CLIENT_URL` = temporary value (you will update after frontend deploy)
-5. Deploy and copy backend URL, for example:
-   - `https://sapna-portfolio-backend.onrender.com`
+## Deployment (Render + Vercel)
 
-### Step 2) Deploy Frontend on Vercel
-1. Open Vercel Dashboard and click `Add New` -> `Project`.
-2. Import repo `sapnasapna02519-wq/portfolio`.
-3. Set `Root Directory` to `frontend`.
-4. Add environment variable:
-   - `VITE_API_BASE_URL=https://sapna-portfolio-backend.onrender.com/api`
-5. Deploy and copy frontend URL, for example:
-   - `https://sapna-portfolio.vercel.app`
-
-### Step 3) Final CORS update in Render
-1. Go to Render service -> `Environment`.
-2. Update:
+### Backend (Render)
+1. Create service from this repo using `render.yaml`.
+2. Set env:
+   - `MONGO_URI=<atlas_uri>`
    - `CLIENT_URL=https://sapna-portfolio.vercel.app`
-3. Save and redeploy backend.
+3. Deploy.
 
-### Step 4) Verify Contact API
-- Open frontend live URL.
-- Submit contact form.
-- Check MongoDB Atlas collection for saved message documents.
+### Frontend (Vercel)
+1. Import same repo.
+2. Set root directory: `frontend`.
+3. Set env:
+   - `VITE_API_BASE_URL=https://sapna-portfolio-backend.onrender.com/api`
+4. Deploy.
 
-## Important
-- Replace `frontend/public/Sapna_Resume.pdf` with your real PDF resume.
-- Update LinkedIn URL in `frontend/src/App.jsx`.
-- Update project links in `frontend/src/data/portfolioData.js` with your actual repositories and demos.
+## Notes
+- Replace `frontend/public/Sapna_Resume.pdf` when your real resume is ready.
+- Update project links in `frontend/src/data/portfolioData.js` as needed.
