@@ -4,7 +4,7 @@
     description:
       "A full stack travel stay listing platform where users can browse destinations, view listing details, and manage accommodation posts.",
     techStack: ["Node.js", "Express.js", "MongoDB", "EJS", "Bootstrap"],
-    github: "https://github.com/sapnasapna02519-wq/Portfolio",
+    github: "https://github.com/sapnasapna02519-wq/Wanderlust",
     liveDemo: "",
   },
 ];

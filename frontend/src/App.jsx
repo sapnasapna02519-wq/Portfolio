@@ -10,6 +10,8 @@ function App() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [formData, setFormData] = useState(initialForm);
   const [status, setStatus] = useState({ type: "", message: "" });
+  const apiBaseUrl =
+    import.meta.env.VITE_API_BASE_URL || "https://sapna-portfolio-backend.onrender.com/api";
 
   // Persist selected theme for a consistent user experience.
   useEffect(() => {
@@ -27,7 +29,7 @@ function App() {
 
     try {
       // Submit contact form data to Express API.
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/contact`, {
+      const response = await fetch(`${apiBaseUrl}/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -89,6 +91,34 @@ function App() {
                 <a href="https://www.linkedin.com/in/sapna-gangwar-47b203299" target="_blank" rel="noreferrer">
                   LinkedIn
                 </a>
+              </div>
+
+              <div className="mt-5 rounded-xl border border-slate-200 bg-white p-4 text-sm text-slate-700 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-200">
+                <p className="font-semibold">Quick Links</p>
+                <ul className="mt-2 list-inside list-disc space-y-1">
+                  <li>
+                    Portfolio:{" "}
+                    <a
+                      className="text-brand-600 hover:underline"
+                      href="https://sapna-portfolio.vercel.app"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      sapna-portfolio.vercel.app
+                    </a>
+                  </li>
+                  <li>
+                    Backend Health:{" "}
+                    <a
+                      className="text-brand-600 hover:underline"
+                      href="https://sapna-portfolio-backend.onrender.com/api/health"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      /api/health
+                    </a>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
