@@ -10,8 +10,7 @@ function App() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [formData, setFormData] = useState(initialForm);
   const [status, setStatus] = useState({ type: "", message: "" });
-  const apiBaseUrl =
-    import.meta.env.VITE_API_BASE_URL || "https://sapna-portfolio-backend.onrender.com/api";
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
   // Persist selected theme for a consistent user experience.
   useEffect(() => {
@@ -26,6 +25,13 @@ function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setStatus({ type: "", message: "" });
+    if (!apiBaseUrl) {
+      setStatus({
+        type: "error",
+        message: "API is not configured. Please set VITE_API_BASE_URL in frontend environment variables.",
+      });
+      return;
+    }
 
     try {
       // Submit contact form data to Express API.
@@ -35,10 +41,12 @@ function App() {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      const contentType = response.headers.get("content-type") || "";
+      const data = contentType.includes("application/json") ? await response.json() : null;
 
       if (!response.ok) {
-        const firstError = data?.errors?.[0]?.message || data.message || "Failed to send message";
+        const firstError =
+          data?.errors?.[0]?.message || data?.message || "Request failed. Please try again in a few moments.";
         throw new Error(firstError);
       }
 

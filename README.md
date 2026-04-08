@@ -63,6 +63,7 @@ Backend `.env`:
 - `PORT=5000`
 - `MONGO_URI=<your_mongodb_connection_string>`
 - `CLIENT_URL=http://localhost:5173`
+- `CLIENT_URLS=http://localhost:5173,https://sapna-portfolio.vercel.app`
 
 ### 2) Frontend
 Open new terminal:
@@ -101,6 +102,7 @@ Request body:
 2. Set env:
    - `MONGO_URI=<atlas_uri>`
    - `CLIENT_URL=https://sapna-portfolio.vercel.app`
+   - `CLIENT_URLS=https://sapna-portfolio.vercel.app`
 3. Deploy.
 
 ### Frontend (Vercel)

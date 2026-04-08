@@ -10,10 +10,20 @@ connectDB();
 
 const app = express();
 
-// Allow frontend application to call backend APIs.
+const allowedOrigins = (process.env.CLIENT_URLS || process.env.CLIENT_URL || "http://localhost:5173")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+// Allow frontend application to call backend APIs from configured origins.
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin(origin, callback) {
+      // Allow non-browser tools (curl, Postman) that do not send Origin.
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      return callback(new Error("CORS: Origin not allowed"));
+    },
   })
 );
 app.use(express.json());
