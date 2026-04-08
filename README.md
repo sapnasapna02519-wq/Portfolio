@@ -14,6 +14,36 @@ Note: `https://sapna-portfolio-backend.onrender.com/` can show `Not Found` becau
 - Backend: Node.js, Express.js
 - Database: MongoDB (Mongoose)
 
+## Requirements
+
+### System Requirements
+- OS: Windows / macOS / Linux
+- Node.js: `>= 20.x`
+- npm: `>= 10.x`
+- Git installed
+- Internet connection for dependency install and deployment
+
+### Development Requirements
+- Code editor (recommended: VS Code)
+- MongoDB connection:
+  - Local MongoDB server, or
+  - MongoDB Atlas cluster
+
+### Environment Variable Requirements
+- Backend:
+  - `PORT`
+  - `MONGO_URI`
+  - `CLIENT_URL`
+  - `CLIENT_URLS`
+- Frontend:
+  - `VITE_API_BASE_URL`
+
+### Deployment Requirements
+- GitHub repository with latest code
+- Render account for backend deployment
+- Vercel account for frontend deployment
+- MongoDB Atlas URI configured in Render
+
 ## Project Structure
 ```text
 portfolio-fullstack/
