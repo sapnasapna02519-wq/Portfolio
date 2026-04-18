@@ -7,7 +7,7 @@ Personal portfolio website built with React + Tailwind (frontend) and Node.js + 
 - Backend API base: `https://sapna-portfolio-backend.onrender.com/api`
 - Health check: `https://sapna-portfolio-backend.onrender.com/api/health`
 
-Note: `https://sapna-portfolio-backend.onrender.com/` can show `Not Found` because root (`/`) route is not defined. Use `/api/health` to test backend.
+Note: backend root (`/`) now returns API status JSON. Health check endpoint remains `/api/health`.
 
 ## Tech Stack
 - Frontend: React.js, Tailwind CSS, Vite

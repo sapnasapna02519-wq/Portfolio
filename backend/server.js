@@ -28,6 +28,14 @@ app.use(
 );
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "Portfolio backend is running",
+    health: "/api/health",
+  });
+});
+
 app.get("/api/health", (req, res) => {
   res.json({ success: true, message: "API is running" });
 });
