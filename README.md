@@ -128,19 +128,27 @@ Request body:
 ## Deployment (Render + Vercel)
 
 ### Backend (Render)
-1. Create service from this repo using `render.yaml`.
-2. Set env:
+1. Create a new web service from this repo using `render.yaml`.
+2. Confirm the root directory is `backend` and the build command is `npm install`.
+3. Set environment variables:
    - `MONGO_URI=<atlas_uri>`
    - `CLIENT_URL=https://sapna-portfolio.vercel.app`
    - `CLIENT_URLS=https://sapna-portfolio.vercel.app`
-3. Deploy.
+4. Deploy the service.
 
 ### Frontend (Vercel)
-1. Import same repo.
-2. Set root directory: `frontend`.
-3. Set env:
+1. Import the same repo into Vercel.
+2. Set the root directory to `frontend`.
+3. Confirm the build command is `npm install && npm run build` and the output directory is `dist`.
+4. Set environment variables:
    - `VITE_API_BASE_URL=https://sapna-portfolio-backend.onrender.com/api`
-4. Deploy.
+5. Deploy the site.
+
+### Production readiness notes
+- The resume button is live and loads `frontend/public/Sapna_Resume.pdf` in production.
+- The contact form requires `VITE_API_BASE_URL` so it can submit to the backend API.
+- Backend CORS accepts requests from `CLIENT_URL` and `CLIENT_URLS`; make sure these include your Vercel frontend URL.
+- For local testing, copy `.env.example` to `.env` in both `frontend` and `backend`, then run `npm run dev` in each folder.
 
 ## Notes
 - Replace `frontend/public/Sapna_Resume.pdf` when your real resume is ready.

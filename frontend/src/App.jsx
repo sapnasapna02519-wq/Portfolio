@@ -10,7 +10,8 @@ function App() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [formData, setFormData] = useState(initialForm);
   const [status, setStatus] = useState({ type: "", message: "" });
-  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || (import.meta.env.DEV ? "http://localhost:5000/api" : "");
 
   // Persist selected theme for a consistent user experience.
   useEffect(() => {
@@ -24,6 +25,8 @@ function App() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (isSubmitting) return;
+
     setStatus({ type: "", message: "" });
     if (!apiBaseUrl) {
       setStatus({
@@ -33,6 +36,7 @@ function App() {
       return;
     }
 
+    setIsSubmitting(true);
     try {
       // Submit contact form data to Express API.
       const response = await fetch(`${apiBaseUrl}/contact`, {
@@ -54,6 +58,8 @@ function App() {
       setFormData(initialForm);
     } catch (error) {
       setStatus({ type: "error", message: error.message });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -76,14 +82,14 @@ function App() {
               </p>
 
               <div className="mt-7 flex flex-wrap gap-3">
-                <button
-                  type="button"
-                  className="cursor-not-allowed rounded-xl bg-brand-600/70 px-5 py-3 text-sm font-semibold text-white"
-                  aria-disabled="true"
-                  title="Resume will be available soon"
+                <a
+                  href="/Sapna_Resume.pdf"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-500"
                 >
-                  Resume Coming Soon
-                </button>
+                  View Resume
+                </a>
                 <a
                   href="#contact"
                   className="rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold dark:border-slate-700"
@@ -93,10 +99,10 @@ function App() {
               </div>
 
               <div className="mt-5 flex gap-5 text-sm font-semibold text-brand-600">
-                <a href="https://github.com/sapnasapna02519-wq" target="_blank" rel="noreferrer">
+                <a href="https://github.com/sapnasapna02519-wq" target="_blank" rel="noreferrer noopener">
                   GitHub
                 </a>
-                <a href="https://www.linkedin.com/in/sapna-gangwar-47b203299" target="_blank" rel="noreferrer">
+                <a href="https://www.linkedin.com/in/sapna-gangwar-47b203299" target="_blank" rel="noreferrer noopener">
                   LinkedIn
                 </a>
               </div>
@@ -110,7 +116,7 @@ function App() {
                       className="text-brand-600 hover:underline"
                       href="https://sapna-portfolio.vercel.app"
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noreferrer noopener"
                     >
                       sapna-portfolio.vercel.app
                     </a>
@@ -238,9 +244,12 @@ function App() {
 
             <button
               type="submit"
-              className="w-fit rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-500"
+              disabled={isSubmitting}
+              className={`w-fit rounded-xl px-5 py-3 text-sm font-semibold text-white transition ${
+                isSubmitting ? "bg-slate-400 cursor-not-allowed" : "bg-brand-600 hover:bg-brand-500"
+              }`}
             >
-              Send Message
+              {isSubmitting ? "Sending..." : "Send Message"}
             </button>
 
             {status.message && (

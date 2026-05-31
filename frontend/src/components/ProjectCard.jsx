@@ -16,11 +16,11 @@
       </div>
 
       <div className="mt-5 flex gap-3 text-sm font-semibold">
-        <a href={project.github} target="_blank" rel="noreferrer" className="text-brand-600 hover:underline">
+        <a href={project.github} target="_blank" rel="noreferrer noopener" className="text-brand-600 hover:underline">
           GitHub
         </a>
         {project.liveDemo && (
-          <a href={project.liveDemo} target="_blank" rel="noreferrer" className="text-brand-600 hover:underline">
+          <a href={project.liveDemo} target="_blank" rel="noreferrer noopener" className="text-brand-600 hover:underline">
             Live Demo
           </a>
         )}
